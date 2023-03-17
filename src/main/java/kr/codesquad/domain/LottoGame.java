@@ -11,8 +11,9 @@ public class LottoGame {
     public void start() throws IOException {
         LottoCustomer lottoCustomer = new LottoCustomer();
         LottoInput.inputPurchaseAmount(lottoCustomer);
-        LottoInput.inputCountOfHand(lottoCustomer);
-        lottoCustomer.purchaseLotto();
+        int countOfHand = LottoInput.inputCountOfHand(lottoCustomer);
+        LottoInput.inputHandPurchaseNumbers(lottoCustomer, countOfHand);
+        lottoCustomer.purchaseAutoLotto();
         LottoOutput.printLotto(lottoCustomer);
 
         ArrayList<Integer> luckyNumbers = LottoInput.inputLuckyNumber();

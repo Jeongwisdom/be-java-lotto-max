@@ -22,8 +22,12 @@ public class LottoCustomer {
         }
     }
 
-    public void purchaseLotto() {
-        IntStream.range(Config.ZERO, calculateCountOfLotto()).forEach(i -> lotteries.add(new Lotto()));
+    public void purchaseAutoLotto() {
+        IntStream.range(Config.ZERO, (calculateCountOfLotto() - countOfHand)).forEach(i -> lotteries.add(new Lotto()));
+    }
+
+    public void purchaseHandLotto(ArrayList<Integer> numbers) {
+        lotteries.add(new Lotto(numbers));
     }
 
     public int calculateCountOfLotto() {
@@ -40,7 +44,8 @@ public class LottoCustomer {
 
     @Override
     public String toString() {
-        return lotteries.stream()
+        return "수동으로 " + countOfHand + "장, 자동으로 " + (calculateCountOfLotto() - countOfHand) + "장을 구매했습니다.\n"
+                + lotteries.stream()
                 .map(Lotto::toString)
                 .collect(Collectors.joining(Config.LINE_BREAK));
     }

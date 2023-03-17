@@ -18,6 +18,12 @@ public class Lotto {
         this.bonusBall = false;
     }
 
+    public Lotto(ArrayList<Integer> numbers) {
+        lotto = numbers;
+        Collections.sort(lotto);
+        this.bonusBall = false;
+    }
+
     public void checkLuckyNumbersContain(ArrayList<Integer> luckyNumbers, int bonusBall) {
         int countOfMatch = Config.ZERO;
         for (Integer integer : lotto) {

@@ -1,7 +1,7 @@
 package kr.codesquad.domain;
 
 import java.util.ArrayList;
-import java.util.Set;
+import java.util.List;
 
 public class Validator {
 
@@ -57,9 +57,9 @@ public class Validator {
         return countOfHand;
     }
 
-    public boolean checkLuckyNumbers(Set<String> answer) {
+    public boolean checkLottoNumbers(List<String> lottoNumbers) {
         try {
-            createLuckyNumbers(answer);
+            validateLottoNumbers(lottoNumbers);
             return true;
         } catch (NumberFormatException e) {
             System.out.println(Config.NOT_INTEGER);
@@ -70,25 +70,17 @@ public class Validator {
         }
     }
 
-    public void createLuckyNumbers(Set<String> answer) {
-        try {
-            validateLuckyNumbers(answer);
-        } catch (NumberFormatException e) {
-            throw new NumberFormatException();
-        }
-    }
-
-    private void validateLuckyNumbers(Set<String> strings) {
-        if(strings.size() != Config.LOTTO_NUMBERS_SIZE) {
+    private void validateLottoNumbers(List<String> lottoNumbers) {
+        if(lottoNumbers.size() != Config.LOTTO_NUMBERS_SIZE) {
             throw new IllegalArgumentException();
         }
-        for (String string : strings) {
-            limitLottoNumbers(Integer.parseInt(string));
+        for (String lottoNumber : lottoNumbers) {
+            limitLottoNumbers(Integer.parseInt(lottoNumber));
         }
     }
 
-    private void limitLottoNumbers(int luckyNumber) {
-        if(luckyNumber < Config.MIN_LOTTO_NUMBER || luckyNumber > Config.MAX_LOTTO_NUMBER) {
+    private void limitLottoNumbers(int lottoNumber) {
+        if(lottoNumber < Config.MIN_LOTTO_NUMBER || lottoNumber > Config.MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException();
         }
     }

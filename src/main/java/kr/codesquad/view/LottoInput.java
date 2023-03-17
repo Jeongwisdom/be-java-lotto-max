@@ -7,10 +7,7 @@ import kr.codesquad.domain.Validator;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoInput {
@@ -33,24 +30,48 @@ public class LottoInput {
         }
     }
 
-    public static void inputCountOfHand(LottoCustomer lottoCustomer) throws IOException {
+    public static int inputCountOfHand(LottoCustomer lottoCustomer) throws IOException {
         boolean validCountOfHand = false;
+        String countOfHandStr = null;
         while (!validCountOfHand) {
-            String countOfHandStr = inputAnswer(Config.ASK_COUNT_OF_HAND_NUMBER);
+            countOfHandStr = inputAnswer(Config.ASK_COUNT_OF_HAND_NUMBER);
             validCountOfHand = Validator.checkCountOfHand(lottoCustomer, countOfHandStr);
+        }
+        return Integer.parseInt(countOfHandStr);
+    }
+
+    public static void inputHandPurchaseNumbers(LottoCustomer lottoCustomer, int countOfHand) throws IOException {
+        Validator validator = new Validator();
+        boolean validHandPurchaseNumbers = false;
+        List<String> handPurchaseNumbersStr = null;
+        for (int i = 0; i < countOfHand; i++) {
+            while (!validHandPurchaseNumbers) {
+                handPurchaseNumbersStr = Arrays.stream(inputAnswer(Config.ASK_HAND_PURCHASE_NUMBERS_NUMBER)
+                                .replaceAll(" ", "")
+                                .split(","))
+                        .distinct()
+                        .collect(Collectors.toList());
+                validHandPurchaseNumbers = validator.checkLottoNumbers(handPurchaseNumbersStr);
+            }
+            validHandPurchaseNumbers = false;
+            ArrayList<Integer> handPurchaseNumbers = (ArrayList<Integer>) handPurchaseNumbersStr.stream()
+                    .map(Integer::parseInt)
+                    .collect(Collectors.toList());
+            lottoCustomer.purchaseHandLotto(handPurchaseNumbers);
         }
     }
 
     public static ArrayList<Integer> inputLuckyNumber() throws IOException {
         Validator validator = new Validator();
         boolean validLuckyNumbers = false;
-        Set<String> answer = new HashSet<>();
+        List<String> answer = new ArrayList<>();
         while (!validLuckyNumbers) {
             answer = Arrays.stream(inputAnswer(Config.ASK_WINNING_NUMBERS_NUMBER)
-                    .replaceAll(" ", "")
-                    .split(","))
-                    .collect(Collectors.toSet());
-            validLuckyNumbers = validator.checkLuckyNumbers(answer);
+                            .replaceAll(" ", "")
+                            .split(","))
+                    .distinct()
+                    .collect(Collectors.toList());
+            validLuckyNumbers = validator.checkLottoNumbers(answer);
         }
         return (ArrayList<Integer>) answer.stream()
                 .map(Integer::parseInt)

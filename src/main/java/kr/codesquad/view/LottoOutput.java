@@ -5,7 +5,6 @@ import kr.codesquad.domain.Rank;
 
 public class LottoOutput {
     public static void printLotto(LottoCustomer lottoCustomer) {
-        System.out.println(lottoCustomer.calculateCountOfLotto() + "개를 구매했습니다.");
         System.out.println(lottoCustomer);
     }
 
