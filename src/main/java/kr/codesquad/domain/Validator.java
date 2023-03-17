@@ -38,6 +38,25 @@ public class Validator {
         }
     }
 
+    public static boolean checkCountOfHand(LottoCustomer lottoCustomer, String countOfHandStr) {
+        try {
+            lottoCustomer.putCountOfHand(countOfHandStr);
+            return true;
+        } catch (NumberFormatException e) {
+            System.out.println(Config.NOT_INTEGER);
+            return false;
+        } catch (IllegalArgumentException e) {
+            System.out.println(Config.IS_POSITIVE_NUMBER);
+            return false;
+        }
+    }
+
+    public int validateCountOfHand(String countOfHandStr) {
+        int countOfHand = changeInt(countOfHandStr);
+        isPositiveNum(countOfHand);
+        return countOfHand;
+    }
+
     public boolean checkLuckyNumbers(Set<String> answer) {
         try {
             createLuckyNumbers(answer);

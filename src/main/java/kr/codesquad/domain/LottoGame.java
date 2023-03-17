@@ -11,6 +11,7 @@ public class LottoGame {
     public void start() throws IOException {
         LottoCustomer lottoCustomer = new LottoCustomer();
         LottoInput.inputPurchaseAmount(lottoCustomer);
+        LottoInput.inputCountOfHand(lottoCustomer);
         lottoCustomer.purchaseLotto();
         LottoOutput.printLotto(lottoCustomer);
 

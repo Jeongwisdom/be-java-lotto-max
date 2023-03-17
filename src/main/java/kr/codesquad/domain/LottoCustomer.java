@@ -6,11 +6,20 @@ import java.util.stream.IntStream;
 
 public class LottoCustomer {
     private int purchaseAmount;
+    private int countOfHand;
     private final ArrayList<Lotto> lotteries = new ArrayList<>();
 
     public void putCustomerPurchaseAmount(String purchaseAmountStr) {
         Validator validator = new Validator();
         this.purchaseAmount = validator.validatePurchaseAmount(purchaseAmountStr);
+    }
+
+    public void putCountOfHand(String countOfHandStr) {
+        Validator validator = new Validator();
+        this.countOfHand = validator.validateCountOfHand(countOfHandStr);
+        if(countOfHand > calculateCountOfLotto()) {
+            throw new IllegalArgumentException();
+        }
     }
 
     public void purchaseLotto() {

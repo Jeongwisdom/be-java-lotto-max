@@ -14,7 +14,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoInput {
-    public static String inputAnswer(int index) throws IOException {
+    private static String inputAnswer(int index) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String[] question = {Config.ASK_PURCHASE_AMOUNT
                 , Config.ASK_COUNT_OF_HAND
@@ -30,6 +30,14 @@ public class LottoInput {
         while (!validPurchaseAmount) {
             String purchaseAmountStr = inputAnswer(Config.ASK_PURCHASE_AMOUNT_NUMBER);
             validPurchaseAmount = Validator.checkPurchaseAmount(lottoCustomer, purchaseAmountStr);
+        }
+    }
+
+    public static void inputCountOfHand(LottoCustomer lottoCustomer) throws IOException {
+        boolean validCountOfHand = false;
+        while (!validCountOfHand) {
+            String countOfHandStr = inputAnswer(Config.ASK_COUNT_OF_HAND_NUMBER);
+            validCountOfHand = Validator.checkCountOfHand(lottoCustomer, countOfHandStr);
         }
     }
 
