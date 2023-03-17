@@ -17,6 +17,8 @@ public class LottoInput {
     public static String inputAnswer(int index) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String[] question = {Config.ASK_PURCHASE_AMOUNT
+                , Config.ASK_COUNT_OF_HAND
+                , Config.ASK_HAND_PURCHASE_NUMBERS
                 , Config.ASK_WINNING_NUMBERS
                 , Config.ASK_BONUS_BALL};
         System.out.println(question[index]);

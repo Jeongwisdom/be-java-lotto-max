@@ -14,14 +14,14 @@ public class LottoCustomer {
     }
 
     public void purchaseLotto() {
-        IntStream.range(Config.ZERO, getCountOfLotto()).forEach(i -> lotteries.add(new Lotto()));
+        IntStream.range(Config.ZERO, calculateCountOfLotto()).forEach(i -> lotteries.add(new Lotto()));
     }
 
-    public int getCountOfLotto() {
+    public int calculateCountOfLotto() {
         return purchaseAmount / Config.PRICE_OF_LOTTO;
     }
 
-    public double getEarningsRate(double totalWinAmount) {
+    public double calculateEarningsRate(double totalWinAmount) {
         return (totalWinAmount - purchaseAmount) / purchaseAmount * Config.PERCENT;
     }
 

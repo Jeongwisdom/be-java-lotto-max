@@ -5,7 +5,7 @@ import kr.codesquad.domain.Rank;
 
 public class LottoOutput {
     public static void printLotto(LottoCustomer lottoCustomer) {
-        System.out.println(lottoCustomer.getCountOfLotto() + "개를 구매했습니다.");
+        System.out.println(lottoCustomer.calculateCountOfLotto() + "개를 구매했습니다.");
         System.out.println(lottoCustomer);
     }
 
@@ -14,6 +14,6 @@ public class LottoOutput {
         System.out.println("--------------------------------");
         Rank.printLottoStats();
         double totalWinAmount = Rank.calculateTotalWinAmount();
-        System.out.println("총 수익률은 " + lottoCustomer.getEarningsRate(totalWinAmount) + "% 입니다.");
+        System.out.println("총 수익률은 " + lottoCustomer.calculateEarningsRate(totalWinAmount) + "% 입니다.");
     }
 }

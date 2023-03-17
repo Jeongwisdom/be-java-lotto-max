@@ -23,7 +23,7 @@ public class LottoCustomerTest {
         System.out.println();
         System.out.println(lottoCustomer2);
 
-        assertThat(lottoCustomer1.getCountOfLotto()).isEqualTo(Integer.parseInt(answer1) / Config.PRICE_OF_LOTTO);
-        assertThat(lottoCustomer2.getCountOfLotto()).isEqualTo(Integer.parseInt(answer2) / Config.PRICE_OF_LOTTO);
+        assertThat(lottoCustomer1.calculateCountOfLotto()).isEqualTo(Integer.parseInt(answer1) / Config.PRICE_OF_LOTTO);
+        assertThat(lottoCustomer2.calculateCountOfLotto()).isEqualTo(Integer.parseInt(answer2) / Config.PRICE_OF_LOTTO);
     }
 }
