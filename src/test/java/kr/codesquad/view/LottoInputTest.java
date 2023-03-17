@@ -3,21 +3,19 @@ package kr.codesquad.view;
 import kr.codesquad.domain.LottoCustomer;
 import kr.codesquad.domain.Validator;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoInputTest {
     @DisplayName("손님의 구입 금액 입력에 따른 결과 확인")
-    @Test
-    public void InputLottoTest() {
+    @ParameterizedTest
+    @CsvSource(value = {"3000,true", "a,false", "0,false"})
+    public void InputLottoTest(String input, boolean expected) {
         LottoCustomer lottoCustomer = new LottoCustomer();
-        boolean result1 = Validator.checkPurchaseAmount(lottoCustomer, "3000");
-        boolean result2 = Validator.checkPurchaseAmount(lottoCustomer, "a");
-        boolean result3 = Validator.checkPurchaseAmount(lottoCustomer, "0");
+        boolean result = Validator.checkPurchaseAmount(lottoCustomer, input);
 
-        assertThat(result1).isTrue();
-        assertThat(result2).isFalse();
-        assertThat(result3).isFalse();
+        assertThat(result).isEqualTo(expected);
     }
 }
